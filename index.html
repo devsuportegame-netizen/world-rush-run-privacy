@@ -1,344 +1,123 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>World Rush Run - Jogo de Corrida Infinita</title>
-    <meta name="description"
-        content="Corra, desvie e conquiste em World Rush Run. Explore mapas incríveis, desbloqueie heróis e quebre recordes neste jogo de corrida infinita.">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap"
-        rel="stylesheet">
-
-    <!-- Styles -->
-    <style>
-        :root {
-            --primary-color: #E6C229;
-            /* Desert Gold */
-            --secondary-color: #2E8B57;
-            /* Forest Green */
-            --accent-color: #FF4081;
-            /* Pinkish Red for accents */
-            --bg-color: #1a1a1a;
-            --text-color: #f0f0f0;
-            --card-bg: #2d2d2d;
-            --font-heading: 'Outfit', sans-serif;
-            --font-body: 'Inter', sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--font-body);
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-family: var(--font-heading);
-            font-weight: 700;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: opacity 0.3s ease;
-        }
-
-        a:hover {
-            opacity: 0.8;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-color);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: var(--text-color);
-            font-weight: 500;
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: radial-gradient(circle at center, #2d2d2d 0%, #1a1a1a 100%);
-            padding-top: 80px;
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-content p {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            color: #ccc;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 40px;
-            background: var(--primary-color);
-            color: #1a1a1a;
-            font-weight: bold;
-            border-radius: 50px;
-            font-size: 1.2rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 15px rgba(230, 194, 41, 0.4);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(230, 194, 41, 0.6);
-        }
-
-        /* Features Section */
-        .features {
-            padding: 100px 0;
-            background: #222;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 60px;
-            color: var(--primary-color);
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-        }
-
-        .feature-card {
-            background: var(--card-bg);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary-color);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--secondary-color);
-        }
-
-        .feature-card h3 {
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-
-        /* Gallery/Screenshots */
-        .gallery {
-            padding: 100px 0;
-        }
-
-        .screenshot-container {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px;
-            padding: 20px 0;
-            scrollbar-width: thin;
-            scrollbar-color: var(--primary-color) var(--bg-color);
-        }
-
-        .screenshot {
-            min-width: 250px;
-            height: 444px;
-            /* 16:9 approx for mobile portrait */
-            background: #333;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-size: 0.9rem;
-            border: 2px solid #444;
-        }
-
-        /* Download Section */
-        .download {
-            padding: 100px 0;
-            text-align: center;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
-        }
-
-        .app-store-badge {
-            display: inline-block;
-            height: 60px;
-            margin-top: 30px;
-            cursor: pointer;
-        }
-
-        /* Footer */
-        footer {
-            padding: 50px 0;
-            text-align: center;
-            background: #111;
-            color: #888;
-            font-size: 0.9rem;
-        }
-
-        .footer-links {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .nav-links {
-                display: none;
-                /* Simple mobile hide for now */
-            }
-        }
-    </style>
-
-    <!-- Favicon (using placeholder for now) -->
-    <link rel="icon" type="image/png" href="assets/icon.png">
+  <meta charset="UTF-8" />
+  <title>Política de Privacidade – World Rush Run</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 16px;
+      line-height: 1.6;
+      color: #222;
+    }
+    h1, h2 {
+      color: #111;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
 </head>
-
 <body>
 
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">World Rush Run</div>
-                <div class="nav-links">
-                    <a href="#features">Recursos</a>
-                </div>
-            </nav>
-        </div>
-    </header>
+<h1>Política de Privacidade – World Rush Run</h1>
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Corra. Desvie. Conquiste.</h1>
-                <p>Prepare-se para a aventura mais rápida da sua vida. Explore novos mundos, desbloqueie heróis únicos e
-                    desafie seus amigos.</p>
-            </div>
-        </div>
-    </section>
+<p><strong>Última atualização:</strong> 01/02/2026</p>
 
-    <section id="features" class="features">
-        <div class="container">
-            <h2 class="section-title">Por que jogar?</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🌎</div>
-                    <h3>4 Mundos Incríveis</h3>
-                    <p>Viaje pelo Deserto escaldante, atravesse a Floresta misteriosa, deslize na Neve e domine a Cidade
-                        futurista.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🦸</div>
-                    <h3>Heróis Exclusivos</h3>
-                    <p>Colete moedas para desbloquear personagens com visuais únicos e habilidades especiais.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Power-ups Épicos</h3>
-                    <p>Use Escudos de proteção, Ímãs de moedas e Multiplicadores de pontuação para ir mais longe.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<p>
+O aplicativo <strong>World Rush Run</strong> respeita a privacidade dos usuários.
+Esta Política de Privacidade descreve como as informações são coletadas, usadas e compartilhadas
+ao utilizar o aplicativo.
+</p>
 
+<h2>1. Informações coletadas</h2>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Guilherme Firmiano Goncalves. Todos os direitos reservados.</p>
-            <div class="footer-links">
-                <a href="https://devsuportegame-netizen.github.io/world-rush-run-privacy/">Política de Privacidade</a>
+<p>
+O aplicativo não coleta informações pessoais diretamente, como nome, email ou telefone.
+</p>
 
-                <a href="mailto:dev.suporte.game@gmail.com">Suporte</a>
-            </div>
-        </div>
-    </footer>
+<p>
+No entanto, serviços de terceiros utilizados no app (como plataformas de anúncios) podem coletar automaticamente
+certos dados, incluindo:
+</p>
 
-    <script>
-        // Simple smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
+<ul>
+  <li>Identificadores do dispositivo</li>
+  <li>Endereço IP</li>
+  <li>Dados aproximados de localização</li>
+  <li>Informações de uso do aplicativo</li>
+  <li>Dados de diagnóstico e desempenho</li>
+</ul>
+
+<p>
+Esses dados são utilizados principalmente para exibição de anúncios, análise de desempenho
+e melhoria da experiência do usuário.
+</p>
+
+<h2>2. Anúncios</h2>
+
+<p>
+O World Rush Run exibe anúncios, incluindo anúncios recompensados (por exemplo, para ganhar vidas,
+abrir baús diários, continuar jogando ou dobrar pontos).
+</p>
+
+<p>
+Os provedores de anúncios podem usar cookies ou tecnologias semelhantes para mostrar anúncios relevantes.
+</p>
+
+<p>
+Política de privacidade do Google:
+<br />
+<a href="https://policies.google.com/privacy" target="_blank">https://policies.google.com/privacy</a>
+</p>
+
+<h2>3. Crianças</h2>
+
+<p>
+Este aplicativo não é direcionado a crianças menores de 13 anos.
+Não coletamos intencionalmente dados pessoais de crianças.
+</p>
+
+<h2>4. Compartilhamento de dados</h2>
+
+<p>
+Não vendemos nem compartilhamos dados pessoais diretamente.
+Dados coletados automaticamente podem ser processados por serviços de terceiros apenas
+para fins de anúncios e análise.
+</p>
+
+<h2>5. Segurança</h2>
+
+<p>
+Adotamos medidas razoáveis para proteger as informações, mas nenhum método de transmissão ou armazenamento
+eletrônico é 100% seguro.
+</p>
+
+<h2>6. Alterações nesta política</h2>
+
+<p>
+Esta Política de Privacidade pode ser atualizada periodicamente.
+Recomendamos que o usuário revise esta página ocasionalmente.
+</p>
+
+<h2>7. Contato</h2>
+
+<p>
+Se tiver dúvidas sobre esta Política de Privacidade, entre em contato:
+</p>
+
+<p>
+<strong>Email:</strong> dev.suporte.game@gmail.com
+</p>
+
+<footer>
+  <p>© 2026 World Rush Run</p>
+</footer>
+
 </body>
-
 </html>
